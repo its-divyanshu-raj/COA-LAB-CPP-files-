@@ -27,58 +27,46 @@ int main() {
     return 0;
 }
 
-// @2
+// Q2 Sum of bits 
 
-// C++ program to compute sum of pairwise bit differences
-#include <bits/stdc++.h>
+#include <iostream>
+#include<math.h>
+
+
 using namespace std;
 
-int sum_bit_diff(vector<int> a)
+int main ()
 {
-	int n = a.size();
-	int ans = 0;
+    int n ;
+    cin >> n ; 
 
-	for (int i = 0; i < n - 1; i++) {
-		int count = 0;
+    int bits[n];
 
-		for (int j = i; j < n; j++) {
-			// Bitwise and of pair (a[i], a[j])
-			int x = a[i] & a[j];
-			// Bitwise or of pair (a[i], a[j])
-			int y = a[i] | a[j];
+    for(int i = 0 ;i <n ;i++)
+    {
+        cin >> bits[i];
 
-			bitset<32> b1(x);
-			bitset<32> b2(y);
+    }
 
-			// to count set bits in and of two numbers
-			int r1 = b1.count();
-			// to count set bits in or of two numbers
-			int r2 = b2.count();
 
-			// Absolute differences at individual bit positions of two
-			// numbers is contributed by pair (a[i], a[j]) in count
-			count = abs(r1 - r2);
+    int ans = 0 ;
+    int sum = 0 ;
 
-			// each pair adds twice of contributed count
-			// as both (a, b) and (b, a) are considered
-			// two separate pairs.
-			ans = ans + (2 * count);
-		}
-	}
-	return ans;
+    for(int i = 0 ; i<n ; i++)
+    {
+        if(bits[i] == 0 )
+        {
+            continue;
+        }
+        else if (bits[i] == 1)
+        {
+            ans = bits[i] * pow(2,n-i-1);
+            sum = ans + sum ;
+        }
+    }
+
+    cout << sum << endl;
+
+
+
 }
-
-int main()
-{
-
-	vector<int> nums{ 10, 5 };
-	int ans = sum_bit_diff(nums);
-
-	cout << ans;
-}
-
-
-
-
-
-
